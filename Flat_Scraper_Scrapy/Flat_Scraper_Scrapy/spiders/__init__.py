@@ -1,9 +1,41 @@
-import scrapy
+"""This module contains a Web Scraper and scrapes ImmobilienScout24.com.
+
+This module's purpose is scraping ImmobilienScout24.com for flat data of
+three different cities: Berlin, Hamburg, Munich. This data consists of
+things such as price, location, room count and more. This is done via
+this module's only class "ImmobilienScoutSpider", which relies on the
+third party framework "Scrapy".
+
+
+  Typical usage example (from command line):
+
+  $ scrapy crawl ImmobilienScout
+"""
+# Standard library
 import requests
 import pickle
 
+# Third party
+import scrapy
+
 
 class ImmobilienScoutSpider(scrapy.Spider):
+    """Scrapes data from ImmobilienScout24.com.
+
+       This class takes control of scraping
+       data from a given website (or websites).
+       It first loops through the start_urls
+       attribute, sends a HTTP GET Request
+       to every single one and passes on the
+       received HTML-Document to the parse
+       method. From here on the desired
+       content gets extracted and sent to
+       the HotspotHousing.com API.
+
+       Attributes:
+           name: The name of the Scraper as a string.
+           start_urls: A list containing all the URLs that shall be scraped.
+       """
     name = 'ImmobilienScout'
 
     # Defined in a list because then you don't need to implement a start_requests() method; If the start_urls class
@@ -42,7 +74,7 @@ class ImmobilienScoutSpider(scrapy.Spider):
             price = price.replace('.', '')
             if ',' in price:
                 price = price.split(',')[0]
-            if int(price) < 1:
+            if int(price) < 1 or int(price) > 10000:
                 continue
 
             # Special case for area:
