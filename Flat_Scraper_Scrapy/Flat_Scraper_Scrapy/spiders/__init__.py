@@ -61,7 +61,7 @@ class ImmobilienScoutSpider(scrapy.Spider):
 
             sqm = flatdata.xpath('.//dd[@class="font-nowrap font-highlight font-tabular"]/text()').getall()[1].split()[0]
             street = flatdata.xpath('.//button[@title="Auf der Karte anzeigen"]/text()').get().split(', ')[0].strip()
-            area = flatdata.xpath('.//button[@title="Auf der Karte anzeigen"]/text()').get().split(', ')[1]
+            area = flatdata.xpath('.//button[@title="Auf der Karte anzeigen"]/text()').get().split(', ')[1].split()[0]
             city = flatdata.xpath('.//button[@title="Auf der Karte anzeigen"]/text()').get().split(', ')[2]
             rooms = flatdata.xpath('.//span[@class="onlyLarge"]/text()').get()
             detail_view_url = (
