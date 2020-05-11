@@ -1,17 +1,15 @@
-FROM python:3.7-slim AS compile-image
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends build-essential gcc
+FROM python:3.7
+ARG VERSION=1.0.0
+LABEL com.FlatScraper.version=$VERSION
+ENV PYTHONUNBUFFERED 1
+ENV STATUS="Development"
 
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+WORKDIR usr/src/app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY Flat_Scraper_Scrapy/ .
 
-FROM python:3.7-slim AS build-image
-COPY --from=compile-image /opt/venv /opt/venv
-
-ENV PATH="/opt/venv/bin:$PATH"
-ENTRYPOINT ['main']
+EXPOSE 8080
+# Test if you really need to specify IP Address or if Port is enough
+ENTRYPOINT ["python", "Flat_Scraper_Scrapy/main.py"]

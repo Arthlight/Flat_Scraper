@@ -14,24 +14,19 @@ import requests
 # Timeout is measured in seconds
 TIMEOUT = 60
 
-counter = 0
 while True:
-    print("it works")
-    counter += 1
-    if counter == 2000:
-        break
-    sleep(TIMEOUT * 60)
-
-while True:
+    print('in here, works!')
     sleep(TIMEOUT * 60000)  # sleep for 1 hours #TODO: Change this to 1 month when production ready
     try:
-        requests.post('http://localhost:2000/api/before/')
+        requests.post('http://localhost:8080/api/before/')
     except Exception as error:
         print(error)
     else:
         command = 'scrapy crawl ImmobilienScout'
         subprocess.run(command, shell=True)
         try:
-            requests.post('http://localhost:2000/api/after/')
+            requests.post('http://localhost:8080/api/after/')
         except Exception as error:
             print(error)
+        else:
+            sleep(TIMEOUT * 60000)  #TODO: change this to be the first statement
