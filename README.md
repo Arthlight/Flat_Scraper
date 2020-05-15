@@ -1,3 +1,3 @@
 # Flat_Scraper
 
-This is a Flat Scraper that works in conjunction with my other repository "HotspotHousingGermany".
+This is a Flat Scraper that works in conjunction with my other repository [HotspotHousingGermany](https://github.com/Arthlight/HotspotHousingGermany).
