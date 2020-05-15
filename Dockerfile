@@ -11,5 +11,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY Flat_Scraper_Scrapy/ .
 
 EXPOSE 8080
-# Test if you really need to specify IP Address or if Port is enough
+
 ENTRYPOINT ["python", "Flat_Scraper_Scrapy/main.py"]

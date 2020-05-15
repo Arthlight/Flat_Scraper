@@ -100,7 +100,7 @@ class ImmobilienScoutSpider(scrapy.Spider):
                 'detail_view': detail_view_url,
             }
             encoded_data = pickle.dumps(data)
-            requests.post('http://localhost:8080/api/flatData/', encoded_data)
+            requests.post('http://HotspotHousing:8080/api/flatData/', encoded_data)
 
         next_page = response.xpath('//a[@data-nav-next-page="true"]/@href').get()
         if next_page:

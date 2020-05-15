@@ -15,18 +15,15 @@ import requests
 TIMEOUT = 60
 
 while True:
-    print('in here, works!')
-    sleep(TIMEOUT * 60000)  # sleep for 1 hours #TODO: Change this to 1 month when production ready
+    sleep(TIMEOUT * 20160)  # sleep for 2 weeks
     try:
-        requests.post('http://localhost:8080/api/before/')
+        requests.post('http://HotspotHousing:8080/api/before/')
     except Exception as error:
         print(error)
     else:
         command = 'scrapy crawl ImmobilienScout'
         subprocess.run(command, shell=True)
         try:
-            requests.post('http://localhost:8080/api/after/')
+            requests.post('http://HotspotHousing:8080/api/after/')
         except Exception as error:
             print(error)
-        else:
-            sleep(TIMEOUT * 60000)  #TODO: change this to be the first statement
