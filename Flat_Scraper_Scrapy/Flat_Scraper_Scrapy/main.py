@@ -17,14 +17,14 @@ TIMEOUT = 60
 while True:
     sleep(TIMEOUT * 20160)  # sleep for 2 weeks
     try:
-        requests.post('http://hotspothousing:8080/api/before/')
+        requests.post('http://HotspotHousing:8080/api/before/')
     except Exception as error:
         print(error)
     else:
         command = 'scrapy crawl ImmobilienScout'
         subprocess.run(command, shell=True)
         try:
-            requests.post('http://hotspothousing:8080/api/after/')
+            requests.post('http://HotspotHousing:8080/api/after/')
         except Exception as error:
             print(error)
 
